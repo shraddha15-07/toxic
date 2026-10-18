@@ -1,0 +1,8 @@
+,n_positive,prevalence_%
+toxic,144334,7.997
+severe_toxic,13,0.001
+obscene,9603,0.532
+threat,4280,0.237
+insult,106534,5.903
+identity_hate,13410,0.743
+sexual_explicit,4686,0.26

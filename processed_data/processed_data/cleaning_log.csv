@@ -1,0 +1,4 @@
+step,rows_before,rows_after,removed,note
+drop missing text,1804874,1804871,3,
+drop empty / placeholder-only / <2 chars,1804871,1802518,2353,
+de-duplicate (scores averaged),1802518,1766429,36089,"14,035 duplicate groups; 5,735 had conflicting target scores"

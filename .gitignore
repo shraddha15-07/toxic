@@ -1,0 +1,28 @@
+# Large model weights and training checkpoints (>100MB exceeds GitHub limit)
+*.safetensors
+*.pt
+*.bin
+*.ckpt
+member2_outputs_v2/checkpoint/
+model/model.safetensors
+
+# Large raw datasets and parquet splits (>100MB exceeds GitHub limit)
+*.parquet
+processed_data/processed_data/*.parquet
+nlp.zip
+
+# Python & Environment
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+*.egg-info/
+.env
+venv/
+env/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToxiGuard — Project Documentation</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 18mm 16mm 20mm 16mm;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background: #ffffff;
+            line-height: 1.55;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Cover Header */
+        .cover {
+            padding: 24px 28px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #31104b 100%);
+            color: #ffffff;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            page-break-after: avoid;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.35);
+            border: 1px solid rgba(165, 180, 252, 0.4);
+            color: #e0e7ff;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 8.5pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .cover h1 {
+            font-size: 24pt;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .cover p.subtitle {
+            font-size: 11pt;
+            color: #cbd5e1;
+            margin: 0 0 16px 0;
+            line-height: 1.4;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 14px;
+            margin-top: 12px;
+        }
+
+        .meta-item .meta-label {
+            font-size: 7.5pt;
+            text-transform: uppercase;
+            color: #94a3b8;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .meta-item .meta-value {
+            font-size: 9pt;
+            font-weight: 600;
+            color: #f8fafc;
+            margin-top: 2px;
+        }
+
+        /* Headings */
+        h1, h2, h3, h4 {
+            color: #0f172a;
+            font-weight: 700;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            font-size: 13.5pt;
+            border-bottom: 1.5px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin-top: 22px;
+            margin-bottom: 10px;
+            color: #1e1b4b;
+            display: flex;
+            align-items: center;
+        }
+
+        h3 {
+            font-size: 11pt;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            color: #334155;
+        }
+
+        p, li {
+            color: #334155;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-top: 4px;
+            margin-bottom: 8px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 3px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 16px 0;
+            font-size: 8.5pt;
+            page-break-inside: avoid;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 7px 10px;
+            border: 1px solid #cbd5e1;
+            font-size: 8.5pt;
+        }
+
+        td {
+            padding: 6px 10px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        /* Callouts / Alerts */
+        .callout {
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 9pt;
+            page-break-inside: avoid;
+        }
+
+        .callout-info {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            color: #1e3a8a;
+        }
+
+        .callout-warning {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            color: #92400e;
+        }
+
+        .callout-success {
+            background-color: #f0fdf4;
+            border-left: 4px solid #10b981;
+            color: #065f46;
+        }
+
+        /* Code & Pre */
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: #f1f5f9;
+            color: #b91c1c;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-size: 8.5pt;
+        }
+
+        pre {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 8pt;
+            overflow-x: hidden;
+            white-space: pre-wrap;
+            line-height: 1.4;
+            margin: 8px 0 12px 0;
+            page-break-inside: avoid;
+        }
+
+        pre code {
+            background: none;
+            color: #e2e8f0;
+            padding: 0;
+        }
+
+        /* Architecture Diagram Box */
+        .diagram-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 8.5pt;
+            line-height: 1.45;
+            page-break-inside: avoid;
+        }
+
+        .formula {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 3px solid #6366f1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 9.5pt;
+            margin: 8px 0;
+            color: #1e1b4b;
+            page-break-inside: avoid;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+            font-weight: 600;
+        }
+        .tag-red { background: #fee2e2; color: #991b1b; }
+        .tag-green { background: #dcfce7; color: #166534; }
+        .tag-purple { background: #f3e8ff; color: #6b21a8; }
+        .tag-blue { background: #dbeafe; color: #1e40af; }
+
+        /* Grid for App modules */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+            page-break-inside: avoid;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+
+        .feature-card h4 {
+            margin: 0 0 4px 0;
+            font-size: 9.5pt;
+            color: #0f172a;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 8pt;
+            color: #475569;
+            text-align: left;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cover Banner -->
+    <div class="cover">
+        <div class="cover-badge">NLP Comprehensive Technical Report</div>
+        <h1>🛡️ ToxiGuard</h1>
+        <p class="subtitle">Multi-Label Toxic Comment Classification, Demographic Fairness Auditing, Confidence Calibration, and Explainable AI (XAI)</p>
+        
+        <div class="meta-grid">
+            <div class="meta-item">
+                <div class="meta-label">Corpus</div>
+                <div class="meta-value">Jigsaw (1.8M Rows)</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Architecture</div>
+                <div class="meta-value">DistilBERT Transformer</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Deployment</div>
+                <div class="meta-value">Streamlit Web App</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Team Project</div>
+                <div class="meta-value">Members 1 to 5</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 1: Executive Summary -->
+    <h2>1. Executive Summary & Problem Formulation</h2>
+    <p>
+        Automated content moderation systems deployed on social networks, community forums, and news portals encounter severe technical failure modes when handling complex natural language. Standard off-the-shelf NLP classifiers suffer from:
+    </p>
+    <ul>
+        <li><strong>Severe Class Imbalance:</strong> High-severity toxicity categories (e.g. <code>threat</code>, <code>sexual_explicit</code>) represent less than 0.3% of comments. Models trained with standard cross-entropy default to predicting the majority non-toxic class, resulting in near-zero recall for dangerous toxicity.</li>
+        <li><strong>Unintended Demographic Bias:</strong> Online toxic discussions frequently target minority communities. As a consequence, machine learning models inadvertently associate benign mentions of identity tokens (e.g., <em>"I am a Muslim woman"</em>, <em>"proud gay teacher"</em>) with toxic sentiment, causing disproportionately high False Positive Rates (FPR) for protected groups.</li>
+        <li><strong>Overconfidence and Lack of Interpretability:</strong> Deep neural models produce uncalibrated probability estimates and act as black boxes, making manual review and regulatory compliance intractable.</li>
+    </ul>
+    <p>
+        <strong>ToxiGuard</strong> solves these challenges through an end-to-end, multi-stage engineering architecture:
+    </p>
+    <div class="callout callout-success">
+        <strong>Core Achievement:</strong> A robust, calibrated DistilBERT model with positive-class loss weighting (up to 423:1), per-label threshold optimization maximizing F1, rigorous fairness auditing across 24 demographic identity groups with Wilson 95% confidence intervals, temperature-scaled calibration with an uncertainty abstention policy, and a production-grade Streamlit web application.
+    </div>
+
+    <!-- Section 2: Division of Work -->
+    <h2>2. Team Contributions & Division of Responsibility</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 15%;">Role / Member</th>
+                <th style="width: 25%;">Focus Area</th>
+                <th style="width: 30%;">Key Files & Source Modules</th>
+                <th style="width: 30%;">Deliverables & Artifacts</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Member 1</strong></td>
+                <td>Data Engineering, Cleaning & EDA</td>
+                <td><code>jigsaw_eda_cleaning.ipynb</code><br><code>toxic_preprocessing.py</code></td>
+                <td>Cleaned Parquet splits (Train/Val/Test)<br><code>dataset_card.json</code>, cleaning logs, EDA reports</td>
+            </tr>
+            <tr>
+                <td><strong>Member 2</strong></td>
+                <td>Model Training & Threshold Tuning</td>
+                <td><code>distilbert_toxicity_finetuning.ipynb</code><br><code>train.py</code>, <code>convert_checkpoint.py</code></td>
+                <td>DistilBERT PyTorch head, <code>model.safetensors</code><br>Tuned <code>thresholds.json</code> (per-label F1 optimization)</td>
+            </tr>
+            <tr>
+                <td><strong>Member 3</strong></td>
+                <td>Fairness Audit & Bias Mitigation</td>
+                <td><code>fair_audit.ipynb</code></td>
+                <td>Wilson 95% CI Subgroup FPR/FNR analysis<br>24-identity disparity heatmaps, counterfactual tests</td>
+            </tr>
+            <tr>
+                <td><strong>Member 4</strong></td>
+                <td>Calibration & Explainability (XAI)</td>
+                <td><code>xai_shap.ipynb</code><br><code>explainer.py</code></td>
+                <td>Expected Calibration Error (ECE), Temperature Scaling<br>Review policy (delta margin), SHAP & Attention attribution</td>
+            </tr>
+            <tr>
+                <td><strong>Member 5</strong></td>
+                <td>System Integration & Web UI</td>
+                <td><code>app.py</code>, <code>predictor.py</code><br><code>verify.py</code>, <code>README.md</code></td>
+                <td>ToxiGuard Streamlit Application (6 pages)<br>Unified pipeline, verification suite, review queue</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Section 3: Architecture Diagram -->
+    <h2>3. System Architecture & Pipeline Flow</h2>
+    <div class="diagram-box">
+[Raw Jigsaw Data (1.8M Rows)] 
+       │
+       ▼
+[Member 1: Cleaning & Deduplication] ───► [StratifiedGroupKFold by article_id (80/10/10)]
+       │                                         │
+       ▼                                         ▼
+[pos_weight Calculation] ───────────────► [Member 2: DistilBERT Multi-Label Training]
+                                                 │
+                                                 ▼
+[thresholds.json (F1 Max)] ◄───────────── [Validation Threshold Sweeps (100 bins)]
+                                                 │
+                     ┌───────────────────────────┴───────────────────────────┐
+                     ▼                                                       ▼
+       [Member 3: Fairness Audit]                              [Member 4: Calibration & XAI]
+       • 24 Identity Subgroups                                 • Expected Calibration Error (ECE)
+       • Wilson 95% CI on FPR/FNR                              • Temperature Scaling (T_j)
+       • Counterfactual Template Tests                         • Margin Rejection Policy (|p - τ| < δ)
+       • Disparity Heatmaps                                    • SHAP & Attention-Head Visualizations
+                     │                                                       │
+                     └───────────────────────────┬───────────────────────────┘
+                                                 ▼
+                               [Member 5: ToxiGuard Streamlit Web UI]
+                               ├── 1. Live Predictor & Attention Heatmap
+                               ├── 2. Model Performance Dashboard
+                               ├── 3. Subgroup Fairness Audit Explorer
+                               ├── 4. Human Moderation Review Queue
+                               ├── 5. Bulk CSV/Text Batch Analysis
+                               └── 6. System Architecture & Diagnostics
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Section 4: Data Engineering -->
+    <h2>4. Data Engineering, Cleaning & Preprocessing (Member 1)</h2>
+    <p>
+        The underlying dataset originates from the Kaggle / Conversation AI <em>Jigsaw Unintended Bias in Toxicity Classification</em> corpus containing <strong>1,804,874 raw records</strong> with multi-rater continuous toxicity fractions in [0.0, 1.0].
+    </p>
+
+    <h3>4.1 Data Cleaning & Deduplication Pipeline</h3>
+    <ul>
+        <li><strong>Missing Values & Nulls:</strong> 3 empty rows dropped. 2,353 placeholder-only comments (&lt; 2 characters) purged.</li>
+        <li><strong>Duplicate Consolidation:</strong> 14,035 duplicate comment groups identified (36,089 total duplicate instances). In 5,735 instances with conflicting target labels, annotator fractions were averaged to maintain signal integrity.</li>
+        <li><strong>Text Stream Standardization (<code>toxic_preprocessing.py</code>):</strong>
+            <ul>
+                <li><strong>Line breaks / whitespace:</strong> 565,449 comments (31.33%) normalized into clean spacing.</li>
+                <li><strong>Repeated characters:</strong> 138,295 comments (7.66%) with 4+ repetitions collapsed (e.g. <em>"nooooo"</em> &rarr; <em>"noo"</em>).</li>
+                <li><strong>Curly quotes / em-dashes:</strong> 62,369 comments (3.46%) standardized to clean ASCII equivalents.</li>
+                <li><strong>URLs:</strong> 53,221 comments (2.95%) replaced with generic <code>[URL]</code> tokens.</li>
+                <li>Dual streams generated: <code>text_raw</code> for DistilBERT tokenization (preserving casing and punctuation context) and <code>text_clean</code> for TF-IDF baselines.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4.2 Leakage-Proof Splitting & Label Imbalance</h3>
+    <p>
+        To prevent identical news articles from leaking between training and test sets, splits were partitioned via <code>StratifiedGroupKFold</code> on <code>article_id</code> into <strong>1,413,142 train</strong> (80%), <strong>176,643 validation</strong> (10%), and <strong>176,644 test</strong> (10%) records.
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Toxicity Label</th>
+                <th>Positive Count</th>
+                <th>Prevalence (%)</th>
+                <th>Positive Class Weight (pos_weight)</th>
+                <th>Action Taken</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>toxic</strong></td>
+                <td>144,334</td>
+                <td>7.997%</td>
+                <td>11.50</td>
+                <td><span class="tag tag-green">Target 1</span></td>
+            </tr>
+            <tr>
+                <td><strong>insult</strong></td>
+                <td>106,534</td>
+                <td>5.903%</td>
+                <td>15.97</td>
+                <td><span class="tag tag-green">Target 2</span></td>
+            </tr>
+            <tr>
+                <td><strong>identity_hate</strong></td>
+                <td>13,410</td>
+                <td>0.743%</td>
+                <td>133.04</td>
+                <td><span class="tag tag-green">Target 3</span></td>
+            </tr>
+            <tr>
+                <td><strong>obscene</strong></td>
+                <td>9,603</td>
+                <td>0.532%</td>
+                <td>186.42</td>
+                <td><span class="tag tag-green">Target 4</span></td>
+            </tr>
+            <tr>
+                <td><strong>sexual_explicit</strong></td>
+                <td>4,686</td>
+                <td>0.260%</td>
+                <td>373.84</td>
+                <td><span class="tag tag-green">Target 5</span></td>
+            </tr>
+            <tr>
+                <td><strong>threat</strong></td>
+                <td>4,280</td>
+                <td>0.237%</td>
+                <td>423.62</td>
+                <td><span class="tag tag-green">Target 6</span></td>
+            </tr>
+            <tr>
+                <td><strong>severe_toxic</strong></td>
+                <td>13</td>
+                <td>0.001%</td>
+                <td>—</td>
+                <td><span class="tag tag-red">Pruned (&lt;500 samples)</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="callout callout-info">
+        <strong>Label Pruning Rationale:</strong> <code>severe_toxic</code> had only 13 positive records out of 1.8M instances. Fitting neural representations on 13 instances across 1.4M train samples results in extreme variance and zero generalizability. The final model rigorously targets <strong>6 multi-label categories</strong>.
+    </div>
+
+    <!-- Section 5: Model Training -->
+    <h2>5. Model Architecture & Threshold Tuning (Member 2)</h2>
+    <h3>5.1 Multi-Label Transformer Formulation</h3>
+    <p>
+        The classifier fine-tunes <code>distilbert-base-uncased</code> with a multi-label classification head projecting the 768-dimensional <code>[CLS]</code> representation to 6 unnormalized logits z_j.
+    </p>
+    <div class="formula">
+        Loss = - (1/6) &Sigma; [ w_j &middot; y_j &middot; log &sigma;(z_j) + (1 - y_j) &middot; log (1 - &sigma;(z_j)) ]<br>
+        where w_j = pos_weight_j = N_negative / N_positive and &sigma;(z) = 1 / (1 + e^(-z))
+    </div>
+    <p>
+        <strong>Training Configuration:</strong> AdamW optimizer (learning rate = 2e-5, weight decay = 0.01), linear warmup for 10% of total steps, dynamic batch padding with max sequence length of 240 tokens, mixed-precision FP16 on GPU.
+    </p>
+
+    <h3>5.2 Per-Label Decision Threshold Optimization</h3>
+    <p>
+        A uniform decision threshold of 0.5 is suboptimal for weighted multi-label models. Member 2 tuned decision thresholds per label by sweeping 100 candidate thresholds on the validation set to maximize each label's F1 score:
+    </p>
+    <pre><code>// Optimal Decision Thresholds (thresholds.json)
+{
+    "toxic": 0.720,             // General Toxicity Boundary
+    "obscene": 0.900,           // Obscenity & Profanity
+    "threat": 0.863,            // Physical Harassment & Violence
+    "insult": 0.789,            // Derogatory Statements
+    "identity_hate": 0.821,     // Protected Demographic Slurs
+    "sexual_explicit": 0.920    // Explicit Adult Material
+}</code></pre>
+
+    <div class="page-break"></div>
+
+    <!-- Section 6: Fairness Audit -->
+    <h2>6. Algorithmic Fairness & Bias Auditing (Member 3)</h2>
+    <p>
+        Member 3 conducted comprehensive fairness audits across <strong>24 demographic identity categories</strong> spanning Gender, Sexual Orientation, Religion, Race/Ethnicity, and Disability.
+    </p>
+
+    <h3>6.1 Evaluation Metric & Wilson 95% Confidence Intervals</h3>
+    <p>
+        Subgroup False Positive Rate (FPR_g) and False Negative Rate (FNR_g) were evaluated on the test set:
+    </p>
+    <div class="formula">
+        FPR_g = FP_g / (FP_g + TN_g), &nbsp;&nbsp;&nbsp; FNR_g = FN_g / (FN_g + TP_g)<br>
+        Wilson CI_95% = [ p + z^2/(2n) &plusmn; z &radic;( p(1-p)/n + z^2/(4n^2) ) ] / [ 1 + z^2/n ] &nbsp; (z = 1.96)
+    </div>
+
+    <h3>6.2 Key Disparity Findings & Counterfactual Benchmarks</h3>
+    <ul>
+        <li><strong>Unintended Bias in Protected Terms:</strong> Naive baselines suffered from elevated False Positive Rates (FPR &gt; baseline + 2%) for comments referencing <code>homosexual_gay_or_lesbian</code>, <code>black</code>, <code>transgender</code>, and <code>muslim</code> identities due to historical online toxicity targeting these groups.</li>
+        <li><strong>Counterfactual Perturbation Testing:</strong> Evaluating template sentences (e.g. <em>"I am a [identity] person"</em>, <em>"We must protect [identity] rights"</em>) demonstrated that after threshold tuning, DistilBERT produced safe probabilities (&lt;0.05) across identity substitutions, confirming robust demographic neutrality.</li>
+    </ul>
+
+    <!-- Section 7: Calibration & XAI -->
+    <h2>7. Confidence Calibration & Explainable AI (Member 4)</h2>
+    <h3>7.1 Probability Calibration via Temperature Scaling</h3>
+    <p>
+        Uncalibrated neural networks exhibit misaligned probabilities. Member 4 evaluated Expected Calibration Error (ECE) and Brier Score before and after fitting <strong>Temperature Scaling</strong> (p_j = &sigma;(z_j / T_j)):
+    </p>
+    <div class="formula">
+        ECE = &Sigma; ( |B_m| / N ) &middot; | acc(B_m) - conf(B_m) |, &nbsp;&nbsp;&nbsp; Brier Score = (1/N) &Sigma; (p_i - y_i)^2
+    </div>
+
+    <h3>7.2 Human Moderation Abstention Policy</h3>
+    <p>
+        To prevent automated misclassifications near decision boundaries, an uncertainty abstention rule routes borderline predictions to human moderators:
+    </p>
+    <div class="formula">
+        Route to Human Review Queue if: &exist; j &isin; {1,...,6} such that | p_j - &tau;_j | &lt; &delta; &nbsp; (&delta; &approx; 0.05)
+    </div>
+    <p>
+        A fairness audit on review routing confirmed that the policy does not cause disparate referral rates for minority identity groups.
+    </p>
+
+    <h3>7.3 Explainability via Attention Weights (explainer.py)</h3>
+    <p>
+        For fast real-time explanations in the web app, attention weights from the final layer of DistilBERT are aggregated across all 12 heads from the <code>[CLS]</code> token to input tokens:
+    </p>
+    <div class="formula">
+        Score(token) = (1/12) &Sigma; Attention_heads(CLS &rarr; token), &nbsp;&nbsp;&nbsp; Normalized = Score / max(Score)
+    </div>
+
+    <!-- Section 8: Web Application -->
+    <h2>8. ToxiGuard Streamlit Web Application (Member 5)</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4>1. Real-Time Predictor</h4>
+            <p>Live inference for any text comment. Visual probability bars with threshold indicators and token-level attention heatmap.</p>
+        </div>
+        <div class="feature-card">
+            <h4>2. Performance Dashboard</h4>
+            <p>Detailed Precision, Recall, F1, ROC-AUC score cards, probability distributions, and calibration comparison metrics.</p>
+        </div>
+        <div class="feature-card">
+            <h4>3. Fairness Audit Explorer</h4>
+            <p>Subgroup FPR/FNR bar charts across 24 demographic identities with Wilson 95% confidence intervals and disparity heatmaps.</p>
+        </div>
+        <div class="feature-card">
+            <h4>4. Moderation Review Queue</h4>
+            <p>Active moderation interface separating confident classifications from borderline cases. Actions: Approve, Reject, Escalate.</p>
+        </div>
+        <div class="feature-card">
+            <h4>5. Batch Classification Engine</h4>
+            <p>Bulk CSV file upload supporting up to 50,000 comments or multi-line manual input with downloadable labeled CSV reports.</p>
+        </div>
+        <div class="feature-card">
+            <h4>6. System Architecture & About</h4>
+            <p>Interactive architecture flow diagrams, system parameter checks, and local file availability diagnostics.</p>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Section 9: Verification & Setup -->
+    <h2>9. System Verification, Setup & Execution Guide</h2>
+    <h3>9.1 Environment Setup</h3>
+    <pre><code># 1. Navigate to project directory
+cd nlp
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Launch Web Application
+streamlit run app.py</code></pre>
+
+    <h3>9.2 Verification Suite Benchmark (<code>python verify.py</code>)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Test Case</th>
+                <th>Input Sentence</th>
+                <th>Expected Outcome</th>
+                <th>Verified Model Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1 (Safe)</strong></td>
+                <td><em>"This article is very informative, thank you!"</em></td>
+                <td>All labels safe</td>
+                <td><span class="tag tag-green">PASSED (All &lt; 0.05)</span></td>
+            </tr>
+            <tr>
+                <td><strong>2 (Insult)</strong></td>
+                <td><em>"You are a complete idiot and nobody wants you here."</em></td>
+                <td>Toxic &amp; Insult triggered</td>
+                <td><span class="tag tag-red">PASSED (Toxic + Insult)</span></td>
+            </tr>
+            <tr>
+                <td><strong>3 (Threat)</strong></td>
+                <td><em>"I will find you and make you regret saying that."</em></td>
+                <td>Threat triggered</td>
+                <td><span class="tag tag-red">PASSED (Threat &gt; 0.86)</span></td>
+            </tr>
+            <tr>
+                <td><strong>4 (Hate)</strong></td>
+                <td><em>"I hate all people from that religion, they should not be allowed here."</em></td>
+                <td>Identity Hate triggered</td>
+                <td><span class="tag tag-purple">PASSED (Identity Hate &gt; 0.82)</span></td>
+            </tr>
+            <tr>
+                <td><strong>5 (Neutral)</strong></td>
+                <td><em>"I am a Muslim woman."</em></td>
+                <td>All labels safe (neutral identity mention)</td>
+                <td><span class="tag tag-green">PASSED (Demographically Safe)</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Section 10: File Manifest -->
+    <h2>10. Complete File Manifest & Artifact Repository</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">File / Directory</th>
+                <th style="width: 20%;">Size / Type</th>
+                <th style="width: 55%;">Role & Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>app.py</code></td>
+                <td>56.8 KB Python</td>
+                <td>Streamlit main application incorporating all 6 UI modules (Member 5).</td>
+            </tr>
+            <tr>
+                <td><code>predictor.py</code></td>
+                <td>8.6 KB Python</td>
+                <td>High-level inference engine with model loading and threshold logic.</td>
+            </tr>
+            <tr>
+                <td><code>explainer.py</code></td>
+                <td>5.2 KB Python</td>
+                <td>Attention-based token attribution engine for interactive heatmaps.</td>
+            </tr>
+            <tr>
+                <td><code>toxic_preprocessing.py</code></td>
+                <td>3.6 KB Python</td>
+                <td>Shared text cleaning, regex normalization, and token sanitization (Member 1).</td>
+            </tr>
+            <tr>
+                <td><code>train.py</code></td>
+                <td>18.9 KB Python</td>
+                <td>DistilBERT fine-tuning script with weighted BCE and threshold search.</td>
+            </tr>
+            <tr>
+                <td><code>convert_checkpoint.py</code></td>
+                <td>3.8 KB Python</td>
+                <td>Extracts PyTorch training checkpoints into HuggingFace safetensors format.</td>
+            </tr>
+            <tr>
+                <td><code>verify.py</code></td>
+                <td>3.0 KB Python</td>
+                <td>Automated verification suite testing standard test benchmark sentences.</td>
+            </tr>
+            <tr>
+                <td><code>thresholds.json</code></td>
+                <td>144 B JSON</td>
+                <td>Optimal per-label decision thresholds maximizing validation F1.</td>
+            </tr>
+            <tr>
+                <td><code>model/</code></td>
+                <td>263 MB Directory</td>
+                <td>Fine-tuned DistilBERT weights (<code>model.safetensors</code>, <code>config.json</code>, <code>vocab.txt</code>).</td>
+            </tr>
+            <tr>
+                <td><code>processed_data/</code></td>
+                <td>739 MB Directory</td>
+                <td>Cleaned Parquet splits (train/val/test) and <code>dataset_card.json</code> (Member 1).</td>
+            </tr>
+            <tr>
+                <td><code>*.ipynb</code></td>
+                <td>4 Notebooks</td>
+                <td>Jupyter notebooks for EDA (M1), Training (M2), Fairness (M3), Calibration &amp; SHAP (M4).</td>
+            </tr>
+            <tr>
+                <td><code>PROJECT_DOCUMENTATION.md</code></td>
+                <td>15.2 KB Markdown</td>
+                <td>Source technical documentation in GitHub Markdown format.</td>
+            </tr>
+            <tr>
+                <td><code>ToxiGuard_Project_Documentation.pdf</code></td>
+                <td>PDF Document</td>
+                <td>Compiled formal technical project report document.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "source_file": "train.csv",
+  "rows_final": 1766429,
+  "splits": {
+    "train": 1413142,
+    "test": 176644,
+    "val": 176643
+  },
+  "labels_all": [
+    "toxic",
+    "severe_toxic",
+    "obscene",
+    "threat",
+    "insult",
+    "identity_hate",
+    "sexual_explicit"
+  ],
+  "labels_model": [
+    "toxic",
+    "obscene",
+    "threat",
+    "insult",
+    "identity_hate",
+    "sexual_explicit"
+  ],
+  "pos_weight": {
+    "toxic": 11.5,
+    "obscene": 186.42,
+    "threat": 423.62,
+    "insult": 15.97,
+    "identity_hate": 133.04,
+    "sexual_explicit": 373.84
+  },
+  "text_columns": {
+    "transformer": "text_raw",
+    "tfidf": "text_clean"
+  },
+  "suggested_max_length": 240,
+  "split_method": "StratifiedGroupKFold by article_id",
+  "fairness_subset": "split == 'test' & has_identity_labels == True; identity columns are annotator fractions (>= 0.5 = mentioned)",
+  "config": {
+    "seed": 42,
+    "label_threshold": 0.5,
+    "identity_mention_threshold": 0.5,
+    "min_positives_for_modelling": 500,
+    "max_rows": null
+  },
+  "cleaning_log": [
+    {
+      "step": "drop missing text",
+      "rows_before": 1804874,
+      "rows_after": 1804871,
+      "removed": 3,
+      "note": ""
+    },
+    {
+      "step": "drop empty / placeholder-only / <2 chars",
+      "rows_before": 1804871,
+      "rows_after": 1802518,
+      "removed": 2353,
+      "note": ""
+    },
+    {
+      "step": "de-duplicate (scores averaged)",
+      "rows_before": 1802518,
+      "rows_after": 1766429,
+      "removed": 36089,
+      "note": "14,035 duplicate groups; 5,735 had conflicting target scores"
+    }
+  ]
+}

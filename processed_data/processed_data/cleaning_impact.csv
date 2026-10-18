@@ -1,0 +1,10 @@
+issue,comments_affected,share_%
+mojibake (encoding damage),0,0.0
+HTML entities (&amp; ...),20,0.0
+HTML tags,1826,0.1
+URLs,53221,2.95
+@mentions,2688,0.15
+repeated characters (4+),138295,7.66
+line breaks / tabs,565449,31.33
+curly quotes / long dashes,62369,3.46
+zero-width / control chars,989,0.05
